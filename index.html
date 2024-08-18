@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Slider</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+  <!--Main Container-->
+  <h1>Image Slider for 7 Wonders of World</h1>
+  <div class="slide-container">
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/Christ The Redeemer.jpeg' alt="Christ The Redeemer">
+      <div class="caption">Christ The Redeemer</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/colosseum.jpeg' alt="Colosseum">
+      <div class="caption">Colosseum</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/Macchu Picchu.jpeg' alt="Machu Picchu">
+      <div class="caption">Machu Picchu</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/petra.jpeg' alt="Petra">
+      <div class="caption">Petra</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/Taj Mahal.jpeg' alt="Taj Mahal">
+      <div class="caption">Taj Mahal</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/Pyramid.jpg' alt="Pyramid of Giza">
+      <div class="caption">Pyramid of Giza</div>
+    </div>
+    <div class="slide fade" style="height: 600px;">
+      <img src='Assets/The great wall of china.jpeg' alt="Great Wall of China">
+      <div class="caption">Great Wall of China</div>
+    </div>
+
+    <a href="#" class="prev" title="Previous">&#10094;</a>
+    <a href="#" class="next" title="Next">&#10095;</a>
+  </div>
+  <div class="dots-container">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <!--Script Starts-->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll('.dot');
+
+    const init = (n) => {
+      slides.forEach((slide, index) => {
+        slide.style.display = "none";
+        dots.forEach((dot) => {
+          dot.classList.remove("active");
+        });
+      });
+      slides[n].style.display = "block";
+      dots[n].classList.add("active");
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init(currentSlide));
+
+    const next = () => {
+      currentSlide = (currentSlide >= slides.length - 1) ? 0 : currentSlide + 1;
+      init(currentSlide);
+    };
+
+    const prev = () => {
+      currentSlide = (currentSlide <= 0) ? slides.length - 1 : currentSlide - 1;
+      init(currentSlide);
+    };
+
+    document.querySelector(".next").addEventListener('click', next);
+    document.querySelector(".prev").addEventListener('click', prev);
+
+    setInterval(() => {
+      next();
+    }, 5000);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        init(i);
+        currentSlide = i;
+      });
+    });
+  </script>
+  <!--Script Ends-->
+</body>
+</html>
